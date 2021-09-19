@@ -1,0 +1,37 @@
+﻿@model MPTEditor.Models.Listeners;
+@{Layout = "_Layout";}
+<div class="container">
+    <form class="form-horizontal" asp-antiforgery="true" asp-controller="Editor" asp-action="AddListeners">
+        <span class="heading">Добавление слушателя</span>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <input type="email" asp-for="Email" class="form-control" id="inputEmail" placeholder="E-mail">
+            <span asp-validation-for="Email" />
+
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="FirstName" class="form-control" id="inputFirst" placeholder="Имя">
+            <span asp-validation-for="FirstName" />
+
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="LastName" class="form-control" id="inputLast" placeholder="Фамилия">
+            <span asp-validation-for="LastName" />
+
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="MiddleName" class="form-control" id="inputMiddle" placeholder="Отчество">
+            <span asp-validation-for="MiddleName" />
+
+        </div>
+        <div class="form-group">
+            <input type="number" asp-for="NumberPhone" class="form-control" id="inputNUmber" placeholder="89008007060">
+            <span asp-validation-for="NumberPhone" />
+        </div>
+        <div class="form-group heading">
+            <button type="submit" class="btn btn-default btn-dark ">Добавить</button>
+        </div>
+    </form>
+
+</div>
+

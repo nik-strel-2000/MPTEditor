@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DoblePayment>
+@{
+    Layout = "_Layout";
+}
+<style>
+    /* Стили таблицы (IKSWEB) */
+    table.iksweb {
+        text-decoration: none;
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+    }
+
+        table.iksweb th {
+            font-weight: normal;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #343a40;
+        }
+
+        table.iksweb td {
+            font-size: 17px;
+            color: #969696;
+        }
+
+        table.iksweb td, table.iksweb th {
+            white-space: pre-wrap;
+            padding: 10px 5px;
+            line-height: 17px;
+            vertical-align: middle;
+            border: 1px solid #354251;
+        }
+
+        table.iksweb tr:hover {
+            background-color: #343a40
+        }
+
+            table.iksweb tr:hover td {
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+    .mobile-table {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+</style>
+<div style="background-color:white">
+
+    <div class="mobile-table">
+        @if (Model == null)
+        {
+            <a>Коллекция пуста!</a>
+        }
+        else
+        {
+
+            <table class="iksweb">
+                <thead>
+                    <tr>
+                        <th>Статус</th>
+                        <th>ФИО</th>
+                        <th>Код договора</th>
+                        <th>Месяц</th>
+                        <th>Год</th>
+                        @for (int i = 1; i <= 31; i++)
+                        {
+                            <th>@i</th>
+
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var Record in Model)
+                        {
+                        <tr>
+                            <td><a class="btn btn-danger" href="~/Editor/DeletePayment?ID=@Record.Id_Record">Удалить</a></td>
+                            <td>@Record.FIO</td>
+                            <td>@Record.Code_contract</td>
+                            <td>@Record.Month</td>
+                            <td>@Record.Year</td>
+
+                            @for (int date = 1; date < 32; date++)
+                            {
+                                if (Record.dates[date-1] == 1)
+                                {<td><a class="btn btn-danger" href="~/Editor/UpdeteTablePayment?ID=@date&Value=1&ID_Record=@Record.Id_Record"> </a></td>}
+                                else if (Record.dates[date-1] == 2)
+                                {<td><a class="btn btn-primary" href="~/Editor/UpdeteTablePayment?ID=@date&Value=2&ID_Record=@Record.Id_Record">Оплачен</a></td> }
+                                else
+                                {<td><a class="btn btn-danger" href="~/Editor/UpdeteTablePayment?ID=@date&Value=1&ID_Record=@Record.Id_Record"> </a></td>}
+                            }
+                        </tr>
+                            }
+                        }
+                </tbody>
+            </table>
+        }
+
+    </div>
+    <a class="btn btn-primary" href="~/Editor/AddPayment">Добавить запись в Реестр оплаты</a>
+</div>
